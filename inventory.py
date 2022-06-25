@@ -12,7 +12,7 @@ class UsedCar:
 
     # print out a cars attributes
     def __str__(self):
-        return 'Car Info: ', self.make, self.model, self.color, self.year
+        return f'Car Info: {self.make} {self.model} {self.color} {self.year}'
 
     # add to the car list inventory as a dictionary structure
     def addCar(self):
@@ -42,6 +42,7 @@ search1 = Inventory('make', 'ford')
 
 # methods on Inventory
 search1.search() 
+print(myCar1)
 
 
 
