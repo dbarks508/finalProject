@@ -11,8 +11,8 @@ class UsedCar:
         self.year = year
 
     # print out a cars attributes
-    def show_stats(self):
-        print('Car Info: ', self.make, self.model, self.color, self.year)
+    def __str__(self):
+        return 'Car Info: ', self.make, self.model, self.color, self.year
 
     # add to the car list inventory as a dictionary structure
     def addCar(self):
