@@ -27,6 +27,12 @@ class Inventory():
     def search(self):
         print(list(filter(lambda item: item[self.searchKey] == self.searchValue, carList)))
 
+class Customer():
+    def __init__(self, name, loanLength, price):
+        self.name = name
+        self.loanLength = loanLength
+        self.price = price
+
 # Used car objects
 myCar1 = UsedCar('1', 'mazda', 'cx-7', 'purple', 2012)
 myCar2 = UsedCar('2', 'ford', 'focus', 'white', 2015)
