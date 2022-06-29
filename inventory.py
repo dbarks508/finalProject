@@ -76,10 +76,17 @@ class Inventory():
 
 #customer class
 class Customer():
-    def __init__(self, name, loanLength, price):
+    def __init__(self, name, downPayment, price, numMonths):
         self.name = name
-        self.loanLength = loanLength
+        self.downPayment = downPayment
         self.price = price
+        self.numMonths = numMonths
+
+    def showPayments(self):
+        afterMoneyDown = self.price - self.downPayment
+        monthlyTotal = afterMoneyDown / self.numMonths
+        print('$' + '%.2f'% float(monthlyTotal), 'per month for ' + str(self.numMonths), 'months')
+
 
 # Used car objects
 myCar1 = UsedCar('1', 'mazda', 'cx-7', 'purple', 2012)
@@ -98,6 +105,8 @@ myCar2.save_to_file()
 myCar3.save_to_file()
 '''
 # Inventory objects
-s1 = Inventory('year', 2012)
-s1.search()
+#s1 = Inventory('year', 2012)
+#s1.search()
 
+cus1 = Customer('dylan', 1000, 12500, 24)
+cus1.showPayments()
