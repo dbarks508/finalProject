@@ -108,5 +108,5 @@ myCar3.save_to_file()
 #s1 = Inventory('year', 2012)
 #s1.search()
 
-cus1 = Customer('dylan', 1000, 12500, 24)
+cus1 = Customer('dylan', 500, 12500, 36)
 cus1.showPayments()
