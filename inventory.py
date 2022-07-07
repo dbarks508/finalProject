@@ -1,3 +1,6 @@
+from tkinter import *
+import customtkinter
+
 # list for holding inventory
 carList = []
 
