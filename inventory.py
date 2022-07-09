@@ -3,6 +3,13 @@ import random
 
 carList = []
 
+def dictFunction(key, value, items):
+    for item in items:
+        if item[key] == value:
+            print(item)
+
+# dictFunction('make', 'mazda', [{'make': 'ford', 'model': 'focus'}, {'make': 'mazda', 'model': 'cx7'}])
+
 # used car class
 class UsedCar:
     def __init__(self, id=None, make=None, model=None, color=None, year=None):
@@ -95,6 +102,8 @@ class Inventory():
 
         print(list(filter(lambda item: item[self.searchKey] == self.searchValue, carList)))
 
+'''lambda item: item[self.searchKey] == self.searchValue'''
+
 #customer class
 class Customer():
     def __init__(self, name, downPayment, price, numMonths):
@@ -120,8 +129,10 @@ def inputCar():
     newCar.save_to_file()
 
 #inputCar()
-s = Inventory('make', 'ford')
+s = Inventory('color', 'black')
 s.search()
+
+# inputCar()
 
 '''Commented out calls'''
 # Used car objects
