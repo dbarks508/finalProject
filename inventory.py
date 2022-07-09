@@ -1,4 +1,6 @@
 # list for holding inventory
+import random
+
 carList = []
 
 # used car class
@@ -18,7 +20,7 @@ class UsedCar:
     def addCar(self):
         carList.append({'id': self.id, 'make': self.make, 'model': self.model, 'color': self.color, 'year': self.year})
 
-        # save to file
+    # save to file
     def save_to_file(self):
         car_info = [self.id, self.make, self.model, self.color, self.year]
         used_car_file = open('UsedCar.txt', 'a')
@@ -72,6 +74,25 @@ class Inventory():
 
     # search for one attribute and one value with class attributes -- not sure which is better
     def search(self):
+        carList = []
+        stuff = ''
+        f = open('UsedCar.txt', 'rt')
+        while True:
+            line = f.readline()
+            if not line:
+                break
+            stuff += line
+        f.close()
+        stuffList = list(stuff.split('\n'))
+        stuffList.pop()
+        for item in stuffList:
+            keys = ['id', 'make', 'model', 'color', 'year']
+            values = list(item.split('\t'))
+            values.pop()
+            carDict = {keys[i]: values[i] for i in range(len(keys))}
+            carList.append(carDict)
+        #print(carList)
+
         print(list(filter(lambda item: item[self.searchKey] == self.searchValue, carList)))
 
 #customer class
@@ -87,16 +108,31 @@ class Customer():
         monthlyTotal = afterMoneyDown / self.numMonths
         print('$' + '%.2f'% float(monthlyTotal), 'per month for ' + str(self.numMonths), 'months')
 
+#function to input car with user input
+def inputCar():
+    newId = random.randint(1, 50)
+    newMake = input('Enter make: ')
+    newModel = input('Enter model: ')
+    newColor = input('Enter Color: ')
+    newYear = input('Enter year: ')
 
+    newCar = UsedCar(newId, newMake, newModel, newColor, newYear)
+    newCar.save_to_file()
+
+#inputCar()
+s = Inventory('make', 'ford')
+s.search()
+
+'''Commented out calls'''
 # Used car objects
-myCar1 = UsedCar('1', 'mazda', 'cx-7', 'purple', 2012)
-myCar2 = UsedCar('2', 'ford', 'focus', 'white', 2015)
-myCar3 = UsedCar('3', 'subaru', 'forester', 'black', 2018)
+# myCar1 = UsedCar('1', 'mazda', 'cx-7', 'purple', 2012)
+# myCar2 = UsedCar('2', 'ford', 'focus', 'white', 2015)
+# myCar3 = UsedCar('3', 'subaru', 'forester', 'black', 2018)
 
 # methods on usedCars
-myCar1.addCar()
-myCar2.addCar()
-myCar3.addCar()
+# myCar1.addCar()
+# myCar2.addCar()
+# myCar3.addCar()
 
 #Save car objects to file
 '''
@@ -108,5 +144,5 @@ myCar3.save_to_file()
 #s1 = Inventory('year', 2012)
 #s1.search()
 
-cus1 = Customer('dylan', 500, 12500, 36)
-cus1.showPayments()
+# cus1 = Customer('dylan', 500, 12500, 36)
+# cus1.showPayments()
