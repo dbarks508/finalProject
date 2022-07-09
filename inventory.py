@@ -13,15 +13,11 @@ class UsedCar:
         self.color = color
         self.year = year
 
-    # print out a cars attributes
-    def __str__(self):
-        return f'Car Info: {self.make} {self.model} {self.color} {self.year}'
-
     # add to the car list inventory as a dictionary structure
     def addCar(self):
         carList.append({'id': self.id, 'make': self.make, 'model': self.model, 'color': self.color, 'year': self.year})
 
-        # save to file
+    # save to file
     def save_to_file(self):
         car_info = [self.id, self.make, self.model, self.color, self.year]
         used_car_file = open('UsedCar.txt', 'a')
@@ -30,6 +26,10 @@ class UsedCar:
         used_car_file.write("\n")
         used_car_file.close()
         print("Successfully add to the inventory.")
+        
+    # print out a cars attributes
+    def __str__(self):
+        return f'Car Info: {self.make} {self.model} {self.color} {self.year}'
 
 # Inventory/computer class  
 class Inventory():
