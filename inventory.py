@@ -1,15 +1,18 @@
-# list for holding inventory
+''' Inventory application for used car lot. Keeps track of inventory and allows the user to search for a certain car type.
+    Authors: Dylan, Lukas, Tran, Jonathan
+    Last edited: 7/9/22
+'''
 import random
 
 carList = []
 
 def dictFunction(key, value, items):
+    # dictFunction('make', 'mazda', [{'make': 'ford', 'model': 'focus'}, {'make': 'mazda', 'model': 'cx7'}])
     for item in items:
         if item[key] == value:
             print(item)
 
-# dictFunction('make', 'mazda', [{'make': 'ford', 'model': 'focus'}, {'make': 'mazda', 'model': 'cx7'}])
-
+'''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 # used car class
 class UsedCar:
     def __init__(self, id=None, make=None, model=None, color=None, year=None):
@@ -37,6 +40,7 @@ class UsedCar:
         used_car_file.close()
         print("Successfully add to the inventory.")
 
+'''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 # Inventory/computer class  
 class Inventory():
     def __init__(self, searchKey=None, searchValue=None):
@@ -44,7 +48,7 @@ class Inventory():
         self.searchValue = searchValue
 
     def deepSearch(self):
-        # print(list(filter(lambda item: item[self.searchKey] == self.searchValue, carList)))
+        readIn()
         searchValue = input("Make: ")
         if searchValue is None or len(searchValue) == 0:
             make_list = carList
@@ -75,35 +79,17 @@ class Inventory():
     
     # search for one attribute and one value
     def singleSearch(self):
+        readIn()
         skey = input('Attribute: ')
         sValue = input('Attribute value: ')
         print(list(filter(lambda item: item[skey] == sValue, carList)))
 
     # search for one attribute and one value with class attributes -- not sure which is better
     def search(self):
-        carList = []
-        stuff = ''
-        f = open('UsedCar.txt', 'rt')
-        while True:
-            line = f.readline()
-            if not line:
-                break
-            stuff += line
-        f.close()
-        stuffList = list(stuff.split('\n'))
-        stuffList.pop()
-        for item in stuffList:
-            keys = ['id', 'make', 'model', 'color', 'year']
-            values = list(item.split('\t'))
-            values.pop()
-            carDict = {keys[i]: values[i] for i in range(len(keys))}
-            carList.append(carDict)
-        #print(carList)
-
+        readIn()
         print(list(filter(lambda item: item[self.searchKey] == self.searchValue, carList)))
 
-'''lambda item: item[self.searchKey] == self.searchValue'''
-
+'''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 #customer class
 class Customer():
     def __init__(self, name, downPayment, price, numMonths):
@@ -128,9 +114,28 @@ def inputCar():
     newCar = UsedCar(newId, newMake, newModel, newColor, newYear)
     newCar.save_to_file()
 
-#inputCar()
-s = Inventory('color', 'black')
-s.search()
+#function to read in from text file
+def readIn():
+    stuff = ''
+    f = open('UsedCar.txt', 'rt')
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        stuff += line
+    f.close()
+    stuffList = list(stuff.split('\n'))
+    stuffList.pop()
+    for item in stuffList:
+        keys = ['id', 'make', 'model', 'color', 'year']
+        values = list(item.split('\t'))
+        values.pop()
+        carDict = {keys[i]: values[i] for i in range(len(keys))}
+        carList.append(carDict)
+
+# inputCar()
+s = Inventory()
+s.singleSearch()
 
 # inputCar()
 

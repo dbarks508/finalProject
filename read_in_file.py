@@ -16,6 +16,6 @@ def convertTextFile(file):
         values.pop()
         carDict = {keys[i]: values[i] for i in range(len(keys))}
         carList.append(carDict)
-    print(carList)
+    # print(carList)
 
 convertTextFile('UsedCar.txt')
