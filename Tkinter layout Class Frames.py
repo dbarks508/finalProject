@@ -83,6 +83,9 @@ class add_car_test(customtkinter.CTkFrame):
     """ Creates frame for a form containing: Make, model, color, year."""
     def __init__(self, parent, controller):  
         customtkinter.CTkFrame.__init__(self, parent)
+        
+        def get_items():
+            print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
                       
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')
@@ -100,8 +103,6 @@ class add_car_test(customtkinter.CTkFrame):
         self.output_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Add Car", command=get_items)
         self.output_car_button.grid(row=4, column=1, pady=15, padx=0)
         
-    def get_items():
-        print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
 
 if __name__ == "__main__":
     app = App()
