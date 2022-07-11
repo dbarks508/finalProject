@@ -1,8 +1,11 @@
+"""
+Current working gui
+
+ - Need input validation
+"""
 import tkinter
 import tkinter.messagebox
 import customtkinter
-import inspect
-import sys
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -12,7 +15,6 @@ class App(customtkinter.CTk):
     WIDTH = 1080
     HEIGHT = 720
     TEXT = ("Roboto Medium", -16)
-    FRAME = ''
 
     def __init__(self):
         super().__init__()
@@ -45,20 +47,21 @@ class App(customtkinter.CTk):
         self.title = customtkinter.CTkLabel(master=self.frame_left, text="Car Inventory", text_font=App.TEXT)
         self.title.grid(row=1, column=0, pady=10, padx=10)
 
-        self.home_button = customtkinter.CTkButton(master=self.frame_left, text="Home")
+        self.home_button = customtkinter.CTkButton(master=self.frame_left, text="Home", text_font=App.TEXT)
         self.home_button.grid(row=2, column=0, pady=10, padx=20)
         
-        self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car", command=self.add_car_test)
+        self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car", text_font=App.TEXT, command=self.add_car_test)
         self.add_car_button.grid(row=3, column=0, pady=10, padx=20)
 
-        self.search_button = customtkinter.CTkButton(master=self.frame_left, text="Search")
+        self.search_button = customtkinter.CTkButton(master=self.frame_left, text="Search", text_font=App.TEXT)
         self.search_button.grid(row=4, column=0, pady=10, padx=20)
 
-        self.color_mode_title = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:")
+        self.color_mode_title = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:", text_font=App.TEXT)
         self.color_mode_title.grid(row=9, column=0, pady=0, padx=20, sticky="w")
 
         self.color_mode_toggle = customtkinter.CTkOptionMenu(master=self.frame_left,
                                                         values=["Light", "Dark", "System"],
+                                                        text_font=App.TEXT,
                                                         command=self.change_appearance_mode)
         self.color_mode_toggle.grid(row=10, column=0, pady=10, padx=20, sticky="w")
 
@@ -88,14 +91,14 @@ class App(customtkinter.CTk):
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')
                 
-        self.add_car_frame = customtkinter.CTkFrame(master=self.frame_right)                    # Change master to self.frame_right, 
-        self.add_car_frame.grid(row=0, column=0, sticky="nswe", padx=30, pady=30)   # and column=0 have embedded frame
+        self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
+        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
             
         for element in range(4):
             ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
             ctk_items[0][element].grid(row=element, column=0, padx=0, pady=15)
             
-            ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame))
+            ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT))
             ctk_items[1][element].grid(row=element, column=1, padx=0, pady=15)  
                 
         self.output_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Add Car", command=get_items)

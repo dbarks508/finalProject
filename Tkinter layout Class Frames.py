@@ -1,8 +1,8 @@
-import tkinter
+"""
+testing gui using frame classes
+"""
 import tkinter.messagebox
 import customtkinter
-import inspect
-import sys
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -45,18 +45,14 @@ class App(customtkinter.CTk):
         self.title = customtkinter.CTkLabel(master=self.frame_left, text="Car Inventory", text_font=App.TEXT)
         self.title.grid(row=1, column=0, pady=10, padx=10)
 
-        self.home_button = customtkinter.CTkButton(master=self.frame_left, text="Home", command=lambda:self.swap_frame())
+        self.home_button = customtkinter.CTkButton(master=self.frame_left, text="Home")
         self.home_button.grid(row=2, column=0, pady=10, padx=20)
         
-        self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car")
+        self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car", command=self.add_car_test)
         self.add_car_button.grid(row=3, column=0, pady=10, padx=20)
 
         self.search_button = customtkinter.CTkButton(master=self.frame_left, text="Search")
         self.search_button.grid(row=4, column=0, pady=10, padx=20)
-        
-        # test button
-        self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car Test")
-        self.add_car_button.grid(row=5, column=0, pady=10, padx=20)
 
         self.color_mode_title = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:")
         self.color_mode_title.grid(row=9, column=0, pady=0, padx=20, sticky="w")
@@ -76,11 +72,6 @@ class App(customtkinter.CTk):
         # ============ frame_right ============
         # set default values
         self.color_mode_toggle.set("Dark")
-        
-    def swap_frame(self, frame_name):
-        # new_frame = self.frames[frame_name]
-        # new_frame.tkraise()
-        frame_name.raise_frame
 
     def change_appearance_mode(self, new_appearance_mode):
         customtkinter.set_appearance_mode(new_appearance_mode)
@@ -88,64 +79,29 @@ class App(customtkinter.CTk):
     def on_closing(self, event=0):
         self.destroy()
 
-
-class car_frame(customtkinter.CTk):
-    """ Creates frame for a form containing: Make, model, color, year """
-    def __init__(self):
-        super().__init__()
-        self.add_car_frame = customtkinter.CTkFrame(master=self)
-        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)
-        
-        self.make_label = customtkinter.CTkLabel(master=self.add_car_frame, text="Make:", text_font=App.TEXT)
-        self.make_label.grid(row=0, column=0, padx=0, pady=15)
-        self.make_entry = customtkinter.CTkEntry(master=self.add_car_frame)
-        self.make_entry.grid(row=0, column=1, padx=0, pady=15)
-        
-        self.model_label = customtkinter.CTkLabel(master=self.add_car_frame, text="Model:", text_font=App.TEXT)
-        self.model_label.grid(row=1, column=0, padx=0, pady=15)
-        self.model_entry = customtkinter.CTkEntry(master=self.add_car_frame)
-        self.model_entry.grid(row=1, column=1, padx=0, pady=15)
-        
-        self.color_label = customtkinter.CTkLabel(master=self.add_car_frame, text="Color:", text_font=App.TEXT)
-        self.color_label.grid(row=2, column=0, padx=0, pady=15)
-        self.color_entry = customtkinter.CTkEntry(master=self.add_car_frame)
-        self.color_entry.grid(row=2, column=1, padx=0, pady=15)
-        
-        self.year_label = customtkinter.CTkLabel(master=self.add_car_frame, text="Year:", text_font=App.TEXT)
-        self.year_label.grid(row=3, column=0, padx=0, pady=15)
-        self.year_entry = customtkinter.CTkEntry(master=self.add_car_frame)
-        self.year_entry.grid(row=3, column=1, padx=0, pady=15)
-        
-        self.output_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Add Car",
-                    command=lambda: print(f'Car({self.make_entry.get()}, {self.model_entry.get()}, {self.color_entry.get()}, {self.year_entry.get()})'))
-        self.output_car_button.grid(row=4, column=1, pady=15, padx=0)
-        
-    def raise_frame(self):
-        self.add_car_frame.tkraise()
-
-class add_car_test(customtkinter.CTk):
-    """ Creates frame for a form containing: Make, model, color, year. Testing for shorter code due to repetition"""
-    def __init__(self):
-        super().__init__()
-        def get_items():
-                print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
-            
+class add_car_test(customtkinter.CTkFrame):
+    """ Creates frame for a form containing: Make, model, color, year."""
+    def __init__(self, parent, controller):  
+        customtkinter.CTkFrame.__init__(self, parent)
+                      
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')
+                
+        self.add_car_frame = customtkinter.CTkFrame(master=self.frame_right)        # Embedded Frame == (master=self.frame_right) and column=0
+        self.add_car_frame.grid(row=0, column=0, sticky="nswe", padx=30, pady=30)   # Full Frame == (master=self) and column=1
             
-        self.add_car_frame = customtkinter.CTkFrame(master=self)
-        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)
-        
         for element in range(4):
             ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
             ctk_items[0][element].grid(row=element, column=0, padx=0, pady=15)
-        
+            
             ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame))
             ctk_items[1][element].grid(row=element, column=1, padx=0, pady=15)  
-            
+                
         self.output_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Add Car", command=get_items)
         self.output_car_button.grid(row=4, column=1, pady=15, padx=0)
-
+        
+    def get_items():
+        print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
 
 if __name__ == "__main__":
     app = App()
