@@ -114,6 +114,8 @@ def inputCar():
     newCar = UsedCar(newId, newMake, newModel, newColor, newYear)
     newCar.save_to_file()
 
+'''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
+
 #function to read in from text file
 def readIn():
     stuff = ''
