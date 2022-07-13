@@ -95,31 +95,6 @@ def readIn():
         carList.append(carDict)
 
 # inputCar()
+
 s = Inventory()
 s.singleSearch()
-
-# inputCar()
-
-'''Commented out calls'''
-# Used car objects
-# myCar1 = UsedCar('1', 'mazda', 'cx-7', 'purple', 2012)
-# myCar2 = UsedCar('2', 'ford', 'focus', 'white', 2015)
-# myCar3 = UsedCar('3', 'subaru', 'forester', 'black', 2018)
-
-# methods on usedCars
-# myCar1.addCar()
-# myCar2.addCar()
-# myCar3.addCar()
-
-#Save car objects to file
-'''
-myCar1.save_to_file()
-myCar2.save_to_file()
-myCar3.save_to_file()
-'''
-# Inventory objects
-#s1 = Inventory('year', 2012)
-#s1.search()
-
-# cus1 = Customer('dylan', 500, 12500, 36)
-# cus1.showPayments()
