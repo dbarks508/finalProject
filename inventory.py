@@ -6,12 +6,6 @@ import random
 
 carList = []
 
-def dictFunction(key, value, items):
-    # dictFunction('make', 'mazda', [{'make': 'ford', 'model': 'focus'}, {'make': 'mazda', 'model': 'cx7'}])
-    for item in items:
-        if item[key] == value:
-            print(item)
-
 '''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 # used car class
 class UsedCar:
@@ -25,10 +19,6 @@ class UsedCar:
     # print out a cars attributes
     def __str__(self):
         return f'Car Info: {self.make} {self.model} {self.color} {self.year}'
-
-    # add to the car list inventory as a dictionary structure
-    def addCar(self):
-        carList.append({'id': self.id, 'make': self.make, 'model': self.model, 'color': self.color, 'year': self.year})
 
     # save to file
     def save_to_file(self):
@@ -47,36 +37,6 @@ class Inventory():
         self.searchKey = searchKey
         self.searchValue = searchValue
 
-    def deepSearch(self):
-        readIn()
-        searchValue = input("Make: ")
-        if searchValue is None or len(searchValue) == 0:
-            make_list = carList
-        else:
-            make_list = list(filter(lambda item: item["make"] == searchValue, carList))
-        print(make_list)
-
-        searchValue = input("Model: ")
-        if searchValue is None or len(searchValue) == 0:
-            model_list = make_list
-        else:
-            model_list = list(filter(lambda item: item["model"] == searchValue, make_list))
-        print(model_list)
-
-        searchValue = input("Color: ")
-        if searchValue is None or len(searchValue) == 0:
-            color_list = model_list
-        else:
-            color_list = list(filter(lambda item: item["color"] == searchValue, model_list))
-        print(color_list)
-
-        searchValue = input("Year: ")
-        if searchValue is None or len(searchValue) == 0:
-            year_list = color_list
-        else:
-            year_list = list(filter(lambda item: item["year"] == int(searchValue), color_list))
-        print(year_list)
-    
     # search for one attribute and one value
     def singleSearch(self):
         readIn()
@@ -103,6 +63,7 @@ class Customer():
         monthlyTotal = afterMoneyDown / self.numMonths
         print('$' + '%.2f'% float(monthlyTotal), 'per month for ' + str(self.numMonths), 'months')
 
+'''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 #function to input car with user input
 def inputCar():
     newId = random.randint(1, 50)
@@ -113,8 +74,6 @@ def inputCar():
 
     newCar = UsedCar(newId, newMake, newModel, newColor, newYear)
     newCar.save_to_file()
-
-'''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 
 #function to read in from text file
 def readIn():
