@@ -6,6 +6,7 @@ Current working gui
 import tkinter
 import tkinter.messagebox
 import customtkinter
+from inventory import *
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -87,6 +88,8 @@ class App(customtkinter.CTk):
         """ Creates frame for a form containing: Make, model, color, year."""
         def get_items():
                 print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
+                newCar = UsedCar(777, ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
+                newCar.save_to_file()
                 
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')

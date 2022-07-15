@@ -98,5 +98,5 @@ def readIn():
 
 # inputCar()
 
-s = Inventory()
-s.singleSearch()
+# s = Inventory()
+# s.singleSearch()
