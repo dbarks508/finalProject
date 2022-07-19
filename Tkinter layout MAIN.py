@@ -54,7 +54,7 @@ class App(customtkinter.CTk):
         self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car", text_font=App.TEXT, command=self.add_car_test)
         self.add_car_button.grid(row=3, column=0, pady=10, padx=20)
 
-        self.search_button = customtkinter.CTkButton(master=self.frame_left, text="Search", text_font=App.TEXT)
+        self.search_button = customtkinter.CTkButton(master=self.frame_left, text="Search", text_font=App.TEXT, command=self.search_car_test)
         self.search_button.grid(row=4, column=0, pady=10, padx=20)
 
         self.color_mode_title = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:", text_font=App.TEXT)
@@ -107,6 +107,28 @@ class App(customtkinter.CTk):
         self.output_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Add Car", command=get_items)
         self.output_car_button.grid(row=4, column=1, pady=15, padx=0)
 
+    def search_car_test(self):
+
+        def find_car():
+            newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
+            returnedSearch = newSearch.search()
+            print(returnedSearch)
+
+        ctk_items = [[],[]]
+        items = ('Attribute', 'Value')
+
+        self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
+        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
+
+        for element in range(2):
+            ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
+            ctk_items[0][element].grid(row=element, column=0, padx=0, pady=15)
+            
+            ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT))
+            ctk_items[1][element].grid(row=element, column=1, padx=0, pady=15)  
+
+        self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
+        self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
 
 if __name__ == "__main__":
     app = App()
