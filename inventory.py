@@ -49,7 +49,6 @@ class Inventory():
     # search for one attribute and one value with class attributes -- not sure which is better
     def search(self):
         readIn()
-
         return list(filter(lambda item: item[self.searchKey] == self.searchValue, carList))
 
 '''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
