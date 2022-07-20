@@ -6,7 +6,6 @@ from tkinter import *
 import customtkinter
 import random
 
-carList = []
 
 '''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 # used car class
@@ -40,15 +39,15 @@ class Inventory():
         self.searchValue = searchValue
 
     # search for one attribute and one value
-    def singleSearch(self):
-        readIn()
-        skey = input('Attribute: ')
-        sValue = input('Attribute value: ')
-        print(list(filter(lambda item: item[skey] == sValue, carList)))
+    # def singleSearch(self):
+    #     carList = readIn()
+    #     skey = input('Attribute: ')
+    #     sValue = input('Attribute value: ')
+    #     print(list(filter(lambda item: item[skey] == sValue, carList)))
 
     # search for one attribute and one value with class attributes -- not sure which is better
     def search(self):
-        readIn()
+        carList = readIn()
         return list(filter(lambda item: item[self.searchKey] == self.searchValue, carList))
 
 '''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
@@ -78,7 +77,8 @@ def inputCar():
     newCar.save_to_file()
 
 #function to read in from text file
-def readIn():
+def readIn(): 
+    carList = []
     stuff = ''
     f = open('UsedCar.txt', 'rt')
     while True:
@@ -95,4 +95,5 @@ def readIn():
         values.pop()
         carDict = {keys[i]: values[i] for i in range(len(keys))}
         carList.append(carDict)
+    return carList
 
