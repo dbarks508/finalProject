@@ -2,3 +2,4 @@
 2	ford	focus	white	2015	
 3	subaru	forester	black	2018		
 777	honda	crv	red	2010	
+18	lamborghini	diablo	yellow	2022	
