@@ -2,6 +2,8 @@
     Authors: Dylan, Lukas, Tran, Jonathan
     Last edited: 7/9/22
 '''
+from tkinter import *
+import customtkinter
 import random
 
 carList = []
@@ -47,7 +49,8 @@ class Inventory():
     # search for one attribute and one value with class attributes -- not sure which is better
     def search(self):
         readIn()
-        print(list(filter(lambda item: item[self.searchKey] == self.searchValue, carList)))
+
+        return list(filter(lambda item: item[self.searchKey] == self.searchValue, carList))
 
 '''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 #customer class
@@ -94,7 +97,3 @@ def readIn():
         carDict = {keys[i]: values[i] for i in range(len(keys))}
         carList.append(carDict)
 
-# inputCar()
-
-s = Inventory()
-s.singleSearch()
