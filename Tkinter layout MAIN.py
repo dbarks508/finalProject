@@ -88,9 +88,9 @@ class App(customtkinter.CTk):
     def add_car_test(self):
         """ Creates frame for a form containing: Make, model, color, year."""
         def get_items():
-                print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
-                newCar = UsedCar(random.randint(1, 50), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
-                newCar.save_to_file()
+            print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
+            newCar = UsedCar(random.randint(1, 50), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
+            newCar.save_to_file()
                 
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')
@@ -114,6 +114,8 @@ class App(customtkinter.CTk):
             newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
             returnedSearch = newSearch.search()
             print(returnedSearch)
+            ctk_items[1][0].delete(0, customtkinter.END)
+            ctk_items[1][1].delete(0, customtkinter.END)
 
         ctk_items = [[],[]]
         items = ('Attribute', 'Value')
@@ -121,7 +123,7 @@ class App(customtkinter.CTk):
         self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
         self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
 
-        for element in range(2):
+        for element in range(len(items)):
             ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
             ctk_items[0][element].grid(row=element, column=0, padx=0, pady=15)
             
