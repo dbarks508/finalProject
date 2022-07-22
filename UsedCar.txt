@@ -6,3 +6,4 @@
 39	jeep	cherokee	black	2010		
 40	honda	crv	blue	2014	
 41	ford	f150	black	2011	
+28	toyota	corolla	orange	2013	
