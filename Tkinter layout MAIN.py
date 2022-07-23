@@ -47,7 +47,7 @@ class App(customtkinter.CTk):
         self.title = customtkinter.CTkLabel(master=self.frame_left, text="Car Inventory", text_font=App.TEXT)
         self.title.grid(row=1, column=0, pady=10, padx=10)
 
-        self.home_button = customtkinter.CTkButton(master=self.frame_left, text="Home", text_font=App.TEXT)
+        self.home_button = customtkinter.CTkButton(master=self.frame_left, text="App Info", text_font=App.TEXT, command=self.show_info_function)
         self.home_button.grid(row=2, column=0, pady=10, padx=20)
         
         self.add_car_button = customtkinter.CTkButton(master=self.frame_left, text="Add Car", text_font=App.TEXT, command=self.add_car_function)
@@ -114,7 +114,7 @@ class App(customtkinter.CTk):
             print(returnedSearch)
             ctk_items[1][0].delete(0, customtkinter.END)
             ctk_items[1][1].delete(0, customtkinter.END)
-
+            
         ctk_items = [[],[]]
         items = ('Attribute', 'Value')
 
@@ -128,8 +128,23 @@ class App(customtkinter.CTk):
             ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT))
             ctk_items[1][element].grid(row=element, column=1, padx=0, pady=15)  
 
+        # self.option_menu = customtkinter.CTkOptionMenu(master=self.add_car_frame, values=['make', 'model', 'color', 'year'])
+        # self.option_menu.grid(row=element, column=3, padx=0, pady=15)
+
         self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
         self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
+
+    def show_info_function(self):
+        info = 'Welcome to our car inventory app!'
+
+        ctk_items = [[],[]]
+
+        self.add_info_frame = customtkinter.CTkFrame(master=self)                         
+        self.add_info_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       
+
+        ctk_items[0].append(customtkinter.CTkLabel(master=self.add_info_frame, text=f'{info}', text_font=App.TEXT))
+        ctk_items[0][0].grid(row=0, column=0, padx=0, pady=15)
+
 
 if __name__ == "__main__":
     app = App()
