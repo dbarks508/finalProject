@@ -112,8 +112,7 @@ class App(customtkinter.CTk):
             newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
             returnedSearch = newSearch.search()
             print(returnedSearch)
-            # ctk_items[1][0].delete(0, customtkinter.END)
-            ctk_items[1][1].delete(0, customtkinter.END)
+            # ctk_items[1][1].delete(0, customtkinter.END)
             
         ctk_items = [[],[]]
 
