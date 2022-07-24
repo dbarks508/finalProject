@@ -112,24 +112,20 @@ class App(customtkinter.CTk):
             newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
             returnedSearch = newSearch.search()
             print(returnedSearch)
-            ctk_items[1][0].delete(0, customtkinter.END)
+            # ctk_items[1][0].delete(0, customtkinter.END)
             ctk_items[1][1].delete(0, customtkinter.END)
             
         ctk_items = [[],[]]
-        items = ('Attribute', 'Value')
+        items = ('Value')
 
         self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
         self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
 
-        for element in range(len(items)):
-            ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
-            ctk_items[0][element].grid(row=element, column=0, padx=0, pady=15)
+        ctk_items[1].append(customtkinter.CTkOptionMenu(master=self.add_car_frame, values=['make', 'model', 'color', 'year'], text_font=App.TEXT))
+        ctk_items[1][0].grid(row=1, column=1, padx=0, pady=15)
             
-            ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT))
-            ctk_items[1][element].grid(row=element, column=1, padx=0, pady=15)  
-
-        # self.option_menu = customtkinter.CTkOptionMenu(master=self.add_car_frame, values=['make', 'model', 'color', 'year'])
-        # self.option_menu.grid(row=element, column=3, padx=0, pady=15)
+        ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT, placeholder_text="Value"))
+        ctk_items[1][1].grid(row=2, column=1, padx=0, pady=15)  
 
         self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
         self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
