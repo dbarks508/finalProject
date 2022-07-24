@@ -116,7 +116,6 @@ class App(customtkinter.CTk):
             ctk_items[1][1].delete(0, customtkinter.END)
             
         ctk_items = [[],[]]
-        items = ('Value')
 
         self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
         self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
