@@ -167,13 +167,15 @@ class App(customtkinter.CTk):
         def get_payment():
             customer_payment = Customer(int(ctk_items[1][0].get()), int(ctk_items[1][1].get()), int(ctk_items[1][2].get()))
             returned_payment = customer_payment.showPayments() 
-            print(returned_payment)
+            output_string = f'You pay ${int(returned_payment)} per month over {ctk_items[1][2].get()} months.'
 
-            show_payment = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=(f'$ {returned_payment} per month')))
+            show_payment = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=(output_string)))
             show_payment.grid(row=6, column=1, padx=0, pady=15) 
+
+            # f'$ {returned_payment} per month')
         
         ctk_items = [[],[]]
-        items = ('Money Down', 'Total cost', 'Desired Num. Months', )
+        items = ('Money Down $', 'Total cost $', 'Number of Months $', )
                 
         self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
         self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
