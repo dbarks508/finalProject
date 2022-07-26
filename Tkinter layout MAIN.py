@@ -1,9 +1,11 @@
 """
 Current working gui
 """
+from cgitb import text
 from faulthandler import disable
 import tkinter
 import tkinter.messagebox
+from turtle import bgcolor
 import customtkinter
 from setuptools import Command
 from inventory import *
@@ -122,16 +124,23 @@ class App(customtkinter.CTk):
             newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
             returnedSearch = newSearch.search()
             print(returnedSearch)
-
+            
+            ## Output into the textbox ##
+            search_output.config(state=NORMAL)
+            search_output.delete(0.0,END)
+            
             if len(returnedSearch) == 0:
                 print('no cars found')
+                search_output.insert('end', 'No cars found or incorrect input.\nYour search may be invalid try again.')
                 return
-                
-            row = 5
+            
             for element in range(len(returnedSearch)):
-                show_search = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=returnedSearch[element]))
-                show_search.grid(row=row, column=1, padx=0, pady=15) 
-                row += 1 
+                for key, value in returnedSearch[element].items():
+                    search_output.insert('end', f'{key}: {value}    ')
+                search_output.insert('end','\n')
+                
+            search_output.config(state=DISABLED)
+            
             disable_button()
 
         def disable_button():
@@ -152,9 +161,14 @@ class App(customtkinter.CTk):
         self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
         self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
 
-        show_search = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text='--> Cars dispalyed here <--'))
-        show_search.grid(row=5, column=1, padx=0, pady=15) 
-
+        # show_search = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text='--> Cars dispalyed here <--'))
+        # show_search.grid(row=5, column=1, padx=0, pady=15) 
+        
+        # Textbox for output #
+        search_output = Text(self.add_car_frame, font=App.TEXT, width=70, height=20, bg='#363636',fg='white', spacing3=10)
+        search_output.grid(row=5, column=1, columnspan=2, padx=0, pady=15)
+        search_output.insert(0.0,'Cars will show here')
+        search_output.config(state=DISABLED)
         
     def show_info_function(self):
         info = 'Welcome to our car inventory app!'
