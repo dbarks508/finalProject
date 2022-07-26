@@ -1,9 +1,11 @@
 """
 Current working gui
 """
+from faulthandler import disable
 import tkinter
 import tkinter.messagebox
 import customtkinter
+from setuptools import Command
 from inventory import *
 import random
 
@@ -55,6 +57,9 @@ class App(customtkinter.CTk):
 
         self.search_button = customtkinter.CTkButton(master=self.frame_left, text="Search", text_font=App.TEXT, command=self.search_car_function)
         self.search_button.grid(row=4, column=0, pady=10, padx=20)
+
+        self.payment_button = customtkinter.CTkButton(master=self.frame_left, text="Payments", text_font=App.TEXT, command=self.payment_function)
+        self.payment_button.grid(row=5, column=0, pady=10, padx=20)
 
         self.color_mode_title = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:", text_font=App.TEXT)
         self.color_mode_title.grid(row=9, column=0, pady=0, padx=20, sticky="w")
@@ -112,7 +117,21 @@ class App(customtkinter.CTk):
             newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
             returnedSearch = newSearch.search()
             print(returnedSearch)
-            # ctk_items[1][1].delete(0, customtkinter.END)
+
+            if len(returnedSearch) == 0:
+                print('no cars found')
+                return
+                
+            row = 5
+            for element in range(len(returnedSearch)):
+                show_search = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=returnedSearch[element]))
+                show_search.grid(row=row, column=1, padx=0, pady=15) 
+                row += 1 
+            disable_button()
+
+        def disable_button():
+            self.search_button = self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car, state=disable, fg_color='grey' )
+            self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
             
         ctk_items = [[],[]]
 
@@ -128,6 +147,10 @@ class App(customtkinter.CTk):
         self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
         self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
 
+        show_search = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text='--> Cars dispalyed here <--'))
+        show_search.grid(row=5, column=1, padx=0, pady=15) 
+
+        
     def show_info_function(self):
         info = 'Welcome to our car inventory app!'
 
@@ -138,6 +161,32 @@ class App(customtkinter.CTk):
 
         ctk_items[0].append(customtkinter.CTkLabel(master=self.add_info_frame, text=f'{info}', text_font=App.TEXT))
         ctk_items[0][0].grid(row=0, column=0, padx=0, pady=15)
+
+    def payment_function(self):
+        
+        def get_payment():
+            customer_payment = Customer(int(ctk_items[1][0].get()), int(ctk_items[1][1].get()), int(ctk_items[1][2].get()))
+            returned_payment = customer_payment.showPayments() 
+            print(returned_payment)
+
+            show_payment = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=(f'$ {returned_payment} per month')))
+            show_payment.grid(row=6, column=1, padx=0, pady=15) 
+        
+        ctk_items = [[],[]]
+        items = ('Money Down', 'Total cost', 'Desired Num. Months', )
+                
+        self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
+        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
+            
+        for element in range(3):
+            ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
+            ctk_items[0][element].grid(row=element, column=0, padx=0, pady=15)
+            
+            ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT))
+            ctk_items[1][element].grid(row=element, column=1, padx=0, pady=15)  
+                
+        self.get_payment_button = customtkinter.CTkButton(master=self.add_car_frame, text="Monthly Payment", command=get_payment)
+        self.get_payment_button.grid(row=4, column=1, pady=15, padx=0)
 
 
 if __name__ == "__main__":

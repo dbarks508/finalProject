@@ -38,14 +38,6 @@ class Inventory():
         self.searchKey = searchKey
         self.searchValue = searchValue
 
-    # search for one attribute and one value
-    # def singleSearch(self):
-    #     carList = readIn()
-    #     skey = input('Attribute: ')
-    #     sValue = input('Attribute value: ')
-    #     print(list(filter(lambda item: item[skey] == sValue, carList)))
-
-    # search for one attribute and one value with class attributes -- not sure which is better
     def search(self):
         carList = readIn()
         return list(filter(lambda item: item[self.searchKey] == self.searchValue, carList))
@@ -53,8 +45,7 @@ class Inventory():
 '''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 #customer class
 class Customer():
-    def __init__(self, name, downPayment, price, numMonths):
-        self.name = name
+    def __init__(self, downPayment, price, numMonths):
         self.downPayment = downPayment
         self.price = price
         self.numMonths = numMonths
@@ -62,7 +53,9 @@ class Customer():
     def showPayments(self):
         afterMoneyDown = self.price - self.downPayment
         monthlyTotal = afterMoneyDown / self.numMonths
-        print('$' + '%.2f'% float(monthlyTotal), 'per month for ' + str(self.numMonths), 'months')
+        # return (f'$  %.2f% {float(monthlyTotal)} per month for  + {str(self.numMonths)} months')
+        return monthlyTotal
+       
 
 '''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 #function to input car with user input
