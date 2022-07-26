@@ -66,10 +66,7 @@ class App(customtkinter.CTk):
         self.color_mode_title = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:", text_font=App.TEXT)
         self.color_mode_title.grid(row=9, column=0, pady=0, padx=20, sticky="w")
 
-        self.color_mode_toggle = customtkinter.CTkOptionMenu(master=self.frame_left,
-                                                        values=["Light", "Dark", "System"],
-                                                        text_font=App.TEXT,
-                                                        command=self.change_appearance_mode)
+        self.color_mode_toggle = customtkinter.CTkOptionMenu(master=self.frame_left, values=["Light", "Dark", "System"], text_font=App.TEXT, command=self.change_appearance_mode)
         self.color_mode_toggle.grid(row=10, column=0, pady=10, padx=20, sticky="w")
 
         # ============ frame_right ============
@@ -141,11 +138,13 @@ class App(customtkinter.CTk):
                 
             search_output.config(state=DISABLED)
             
-            disable_button()
+            # self.search_car_button.config(state=DISABLED)
+            # disable_button()
 
-        def disable_button():
-            self.search_button = self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car, state=disable, fg_color='grey' )
-            self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
+# === Redundant function ===
+        # def disable_button():
+        #     self.search_button = self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car, state=disable, fg_color='grey' )
+        #     self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
             
         ctk_items = [[],[]]
 
@@ -160,14 +159,11 @@ class App(customtkinter.CTk):
 
         self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
         self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
-
-        # show_search = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text='--> Cars dispalyed here <--'))
-        # show_search.grid(row=5, column=1, padx=0, pady=15) 
         
         # Textbox for output #
-        search_output = Text(self.add_car_frame, font=App.TEXT, width=70, height=20, bg='#363636',fg='white', spacing3=10)
+        search_output = Text(self.add_car_frame, font=App.TEXT, width=70, height=16, bg='#363636',fg='white', spacing3=10)
         search_output.grid(row=5, column=1, columnspan=2, padx=0, pady=15)
-        search_output.insert(0.0,'Cars will show here')
+        search_output.insert(0.0,'Searched cars will show here')
         search_output.config(state=DISABLED)
         
     def show_info_function(self):
@@ -189,7 +185,7 @@ class App(customtkinter.CTk):
             output_string = f'You pay ${int(returned_payment)} per month over {ctk_items[1][2].get()} months.'
 
             show_payment = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=(output_string)))
-            show_payment.grid(row=6, column=1, padx=0, pady=15) 
+            show_payment.grid(row=6, column=0, columnspan=2, padx=0, pady=15) 
 
             # f'$ {returned_payment} per month')
         
