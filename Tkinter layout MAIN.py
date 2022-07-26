@@ -94,6 +94,11 @@ class App(customtkinter.CTk):
             print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
             newCar = UsedCar(random.randint(1, 50), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
             newCar.save_to_file()
+
+            ctk_items[1][0].delete(0, customtkinter.END)
+            ctk_items[1][1].delete(0, customtkinter.END)
+            ctk_items[1][2].delete(0, customtkinter.END)
+            ctk_items[1][3].delete(0, customtkinter.END)
                 
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')

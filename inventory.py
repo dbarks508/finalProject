@@ -53,7 +53,6 @@ class Customer():
     def showPayments(self):
         afterMoneyDown = self.price - self.downPayment
         monthlyTotal = afterMoneyDown / self.numMonths
-        # return (f'$  %.2f% {float(monthlyTotal)} per month for  + {str(self.numMonths)} months')
         return monthlyTotal
        
 
