@@ -1,6 +1,8 @@
-"""
-Current working gui
-"""
+''' 
+Inventory application for used car lot. Keeps track of inventory and allows the user to search for a certain car type.
+Authors: Dylan, Lukas, Tran, Jonathan
+SDEV - 220
+'''
 from tkinter import ttk
 import customtkinter
 from inventory import *

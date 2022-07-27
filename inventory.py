@@ -3,8 +3,8 @@
     Last edited: 7/9/22
 '''
 from tkinter import *
-import customtkinter
 import random
+import csv
 
 
 '''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
