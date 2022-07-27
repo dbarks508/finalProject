@@ -1,14 +1,8 @@
 """
 Current working gui
 """
-from cgitb import text
-from faulthandler import disable
-import tkinter as tk
-import tkinter.messagebox
 from tkinter import ttk
-from turtle import bgcolor
 import customtkinter
-from setuptools import Command
 from inventory import *
 import random
 from PIL import Image, ImageTk
@@ -95,16 +89,18 @@ class App(customtkinter.CTk):
             print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
             
             if (ctk_items[1][3].get().isnumeric()) is False:
+                self.add_car_error.config(text='Year must be a numeric value', fg='#821515')
                 print('year must be a numeric value')
                 return
             
             for i in range(4):
                 current_Element = ctk_items[1][i].get()
                 if current_Element != current_Element.lower():
+                    self.add_car_error.config(text='Make entry lowercase', fg='#821515')
                     print('please make lower case')
                     return
             
-            newCar = UsedCar(random.randint(1, 50), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
+            newCar = UsedCar(random.randint(1, 999), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
             newCar.save_to_file()
 
             ctk_items[1][0].delete(0, customtkinter.END)
@@ -127,6 +123,9 @@ class App(customtkinter.CTk):
                 
         self.output_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Add Car", command=get_items)
         self.output_car_button.grid(row=4, column=1, pady=15, padx=0)
+        
+        self.add_car_error = customtkinter.CTkLabel(master=self.add_car_frame, text='Make, model, and color\nmust be lowercase.\n\nYear must be numeric.', text_font=("Roboto Medium", 11))
+        self.add_car_error.grid(column=1, row=5, padx=0, pady=15)
 
     def search_car_function(self):
 

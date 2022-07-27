@@ -12,3 +12,4 @@
 33	poniac	vibe	gray	2009    	
 16	tesla	models	white	2021	
 9	bmw	m5	orange	2015	
+34	aston martin	vantage	blue	2005	
