@@ -32,6 +32,13 @@ class UsedCar:
         used_car_file.write("\n")
         used_car_file.close()
         print("Successfully add to the inventory.")
+        
+        ## Write to CSV File
+        headers = ['id', 'make', 'model', 'color', 'year']
+        car_info = {'id':self.id, 'make':self.make, 'model':self.model, 'color':self.color, 'year':self.year}
+        with open('UsedCar.csv', 'a', newline = '') as file:
+            csv_writer = csv.DictWriter(file, fieldnames = headers)
+            csv_writer.writerow(car_info)
 
 '''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 # Inventory/computer class  
