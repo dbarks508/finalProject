@@ -3,13 +3,15 @@ Current working gui
 """
 from cgitb import text
 from faulthandler import disable
-import tkinter
+import tkinter as tk
 import tkinter.messagebox
+from tkinter import ttk
 from turtle import bgcolor
 import customtkinter
 from setuptools import Command
 from inventory import *
 import random
+from PIL import Image, ImageTk
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -23,7 +25,7 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title("Car Application")
+        self.title("Car Inventory")
         self.geometry(f"{App.WIDTH}x{App.HEIGHT}")
         self.protocol("WM_DELETE_WINDOW", self.on_closing)  # call .on_closing() when app gets closed
 
@@ -48,7 +50,7 @@ class App(customtkinter.CTk):
         self.frame_left.grid_rowconfigure(8, minsize=20)    # empty row with minsize as spacing
         self.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
 
-        self.title = customtkinter.CTkLabel(master=self.frame_left, text="Car Inventory", text_font=App.TEXT)
+        self.title = customtkinter.CTkLabel(master=self.frame_left, text="Menu", text_font=App.TEXT)
         self.title.grid(row=1, column=0, pady=10, padx=10)
 
         self.home_button = customtkinter.CTkButton(master=self.frame_left, text="App Info", text_font=App.TEXT, command=self.show_info_function)
@@ -167,15 +169,20 @@ class App(customtkinter.CTk):
         search_output.config(state=DISABLED)
         
     def show_info_function(self):
-        info = 'Welcome to our car inventory app!'
-
-        ctk_items = [[],[]]
-
+        global image1
         self.add_info_frame = customtkinter.CTkFrame(master=self)                         
         self.add_info_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       
 
-        ctk_items[0].append(customtkinter.CTkLabel(master=self.add_info_frame, text=f'{info}', text_font=App.TEXT))
-        ctk_items[0][0].grid(row=0, column=0, padx=0, pady=15)
+        home_info_label = customtkinter.CTkLabel(master=self.add_info_frame, text='Car Inventory', text_font=("Roboto Medium", 35))
+        home_info_label.pack()
+        
+        home_separator = ttk.Separator(master=self.add_info_frame, orient='horizontal')
+        home_separator.pack(fill='x')
+        
+        # =========== Image is a possibility, kind of doesnt fit the app, replace with just text? ========== 
+        image1 = ImageTk.PhotoImage(Image.open("blue_car.png").resize((470,268),Image.ANTIALIAS))
+        blue_car_image = Label(master=self.add_info_frame, image=image1)
+        blue_car_image.pack(pady=20)
 
     def payment_function(self):
         
@@ -208,4 +215,5 @@ class App(customtkinter.CTk):
 
 if __name__ == "__main__":
     app = App()
+    app.show_info_function()
     app.mainloop()
