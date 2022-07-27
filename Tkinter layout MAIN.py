@@ -102,6 +102,8 @@ class App(customtkinter.CTk):
                     print('please make lower case')
                     return
             
+            self.add_car_error = customtkinter.CTkLabel(master=self.add_car_frame, text='Make, model, and color\nmust be lowercase.\n\nYear must be numeric.', text_font=("Roboto Medium", 11))
+            self.add_car_error.grid(column=1, row=5, padx=0, pady=15)
             newCar = UsedCar(random.randint(1, 999), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
             newCar.save_to_file()
 
