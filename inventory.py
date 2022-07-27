@@ -24,7 +24,9 @@ class UsedCar:
     # save to file
     def save_to_file(self):
         car_info = [self.id, self.make, self.model, self.color, self.year]
-        used_car_file = open('UsedCar.txt', 'a')
+        used_car_file = open('UsedCar.txt', 'r+')
+        if used_car_file.readline() is None:
+            used_car_file.write("\n")
         for i in car_info:
             used_car_file.write("%s\t" % i)
         used_car_file.write("\n")

@@ -9,4 +9,6 @@
 28	toyota	corolla	orange	2013	
 49	toyota	corolla	white	2008	
 17	lotus	elise	yellow	2010	
-33	poniac	vibe	gray	2009
+33	poniac	vibe	gray	2009    	
+16	tesla	models	white	2021	
+9	bmw	m5	orange	2015	
