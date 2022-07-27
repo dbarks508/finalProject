@@ -94,6 +94,7 @@ class App(customtkinter.CTk):
         def get_items():
             print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
             
+# ======== Make lower by default instead of error message? =======
             for i in range(4):
                 current_Element = ctk_items[1][i].get()
                 if current_Element != current_Element.lower():
@@ -127,7 +128,7 @@ class App(customtkinter.CTk):
     def search_car_function(self):
 
         def find_car():
-            newSearch = Inventory(ctk_items[1][0].get(), ctk_items[1][1].get())
+            newSearch = Inventory(search_drop_menu.get(), search_value_input.get())
             returnedSearch = newSearch.search()
             print(returnedSearch)
             
@@ -146,25 +147,16 @@ class App(customtkinter.CTk):
                 search_output.insert('end','\n')
                 
             search_output.config(state=DISABLED)
-            
-            # self.search_car_button.config(state=DISABLED)
-            # disable_button()
 
-# === Redundant function ===
-        # def disable_button():
-        #     self.search_button = self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car, state=disable, fg_color='grey' )
-        #     self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
-            
-        ctk_items = [[],[]]
 
         self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
         self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
 
-        ctk_items[1].append(customtkinter.CTkOptionMenu(master=self.add_car_frame, values=['make', 'model', 'color', 'year'], text_font=App.TEXT))
-        ctk_items[1][0].grid(row=1, column=1, padx=0, pady=15)
+        search_drop_menu = (customtkinter.CTkOptionMenu(master=self.add_car_frame, values=['make', 'model', 'color', 'year'], text_font=App.TEXT))
+        search_drop_menu.grid(row=1, column=1, padx=0, pady=15)
             
-        ctk_items[1].append(customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT, placeholder_text="Value"))
-        ctk_items[1][1].grid(row=2, column=1, padx=0, pady=15)  
+        search_value_input = (customtkinter.CTkEntry(master=self.add_car_frame, text_font=App.TEXT, placeholder_text="Value"))
+        search_value_input.grid(row=2, column=1, padx=0, pady=15)  
 
         self.search_car_button = customtkinter.CTkButton(master=self.add_car_frame, text="Search Inventory", command=find_car)
         self.search_car_button.grid(row=4, column=1, pady=15, padx=0)
