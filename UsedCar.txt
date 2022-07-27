@@ -13,3 +13,5 @@
 16	tesla	models	white	2021	
 9	bmw	m5	orange	2015	
 34	aston martin	vantage	blue	2005	
+352	ford	mustang	yellow	2012	
+750	1232213			2005	
