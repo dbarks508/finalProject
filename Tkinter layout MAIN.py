@@ -93,6 +93,13 @@ class App(customtkinter.CTk):
         """ Creates frame for a form containing: Make, model, color, year."""
         def get_items():
             print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
+            
+            for i in range(4):
+                current_Element = ctk_items[1][i].get()
+                if current_Element != current_Element.lower():
+                    print('please make lower case')
+                    return
+            
             newCar = UsedCar(random.randint(1, 50), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
             newCar.save_to_file()
 
