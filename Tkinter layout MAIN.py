@@ -94,6 +94,10 @@ class App(customtkinter.CTk):
         def get_items():
             print(f'Car({ctk_items[1][0].get()}, {ctk_items[1][1].get()}, {ctk_items[1][2].get()}, {ctk_items[1][3].get()})')
             
+            if (ctk_items[1][3].get().isnumeric()) is False:
+                print('year must be a numeric value')
+                return
+            
             for i in range(4):
                 current_Element = ctk_items[1][i].get()
                 if current_Element != current_Element.lower():
