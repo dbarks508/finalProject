@@ -6,6 +6,5 @@
 39	jeep	cherokee	black	2010		
 40	honda	crv	blue	2014	    
 28	toyota	corolla	orange	2013	
-49	toyota	corolla	white	2008	
+49	toyota	corolla	white	2008 
 17	lotus	elise	yellow	2010	
-33	poniac	vibe	gray	2009	
