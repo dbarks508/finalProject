@@ -9,8 +9,8 @@ from inventory import *
 import random
 from PIL import Image, ImageTk
 
-customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
-customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+customtkinter.set_appearance_mode("System")  
+customtkinter.set_default_color_theme("blue")  
 
 class App(customtkinter.CTk):
 
@@ -41,10 +41,10 @@ class App(customtkinter.CTk):
         # ============ frame_left ============
 
         # configure grid layout (1x11)
-        self.frame_left.grid_rowconfigure(0, minsize=10)   # empty row with minsize as spacing
-        self.frame_left.grid_rowconfigure(6, weight=1)  # empty row as spacing
-        self.frame_left.grid_rowconfigure(8, minsize=20)    # empty row with minsize as spacing
-        self.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
+        self.frame_left.grid_rowconfigure(0, minsize=10)   
+        self.frame_left.grid_rowconfigure(6, weight=1)  
+        self.frame_left.grid_rowconfigure(8, minsize=20)   
+        self.frame_left.grid_rowconfigure(11, minsize=10)  
 
         self.title = customtkinter.CTkLabel(master=self.frame_left, text="Menu", text_font=App.TEXT)
         self.title.grid(row=1, column=0, pady=10, padx=10)
@@ -102,7 +102,6 @@ class App(customtkinter.CTk):
                     print('please make lower case')
                     return
             
-            # fix for light dark mode toggle #
             self.add_car_error.config(text='Make, model, and color\nmust be lowercase.\n\nYear must be numeric.', fg='white')
            
             newCar = UsedCar(random.randint(1, 999), ctk_items[1][0].get(), ctk_items[1][1].get(), ctk_items[1][2].get(), ctk_items[1][3].get())
@@ -116,8 +115,8 @@ class App(customtkinter.CTk):
         ctk_items = [[],[]]
         items = ('Make', 'Model', 'Color', 'Year')
                 
-        self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
-        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
+        self.add_car_frame = customtkinter.CTkFrame(master=self)                        
+        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       
             
         for element in range(4):
             ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
@@ -155,9 +154,8 @@ class App(customtkinter.CTk):
                 
             search_output.config(state=DISABLED)
 
-
-        self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
-        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
+        self.add_car_frame = customtkinter.CTkFrame(master=self)                       
+        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       
 
         search_drop_menu = (customtkinter.CTkOptionMenu(master=self.add_car_frame, values=['make', 'model', 'color', 'year'], text_font=App.TEXT))
         search_drop_menu.grid(row=1, column=1, padx=0, pady=15)
@@ -184,8 +182,7 @@ class App(customtkinter.CTk):
         
         home_separator = ttk.Separator(master=self.add_info_frame, orient='horizontal')
         home_separator.pack(fill='x')
-        
-        # =========== Image is a possibility, kind of doesnt fit the app, replace with just text? ========== 
+         
         image1 = ImageTk.PhotoImage(Image.open("blue_car.png").resize((470,268),Image.ANTIALIAS))
         blue_car_image = Label(master=self.add_info_frame, image=image1)
         blue_car_image.pack(pady=20)
@@ -199,14 +196,12 @@ class App(customtkinter.CTk):
 
             show_payment = (customtkinter.CTkLabel(master=self.add_car_frame, text_font=App.TEXT, text=(output_string)))
             show_payment.grid(row=6, column=0, columnspan=2, padx=0, pady=15) 
-
-            # f'$ {returned_payment} per month')
         
         ctk_items = [[],[]]
         items = ('Money Down $', 'Total cost $', 'Number of Months $', )
                 
-        self.add_car_frame = customtkinter.CTkFrame(master=self)                        # Embedded Frame == (master=self.frame_right) and column=0 
-        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       # Full Frame == (master=self) and column=1
+        self.add_car_frame = customtkinter.CTkFrame(master=self)                         
+        self.add_car_frame.grid(row=0, column=1, sticky="nswe", padx=30, pady=30)       
             
         for element in range(3):
             ctk_items[0].append(customtkinter.CTkLabel(master=self.add_car_frame, text=f'{items[element]}:', text_font=App.TEXT))
@@ -217,7 +212,6 @@ class App(customtkinter.CTk):
                 
         self.get_payment_button = customtkinter.CTkButton(master=self.add_car_frame, text="Monthly Payment", command=get_payment)
         self.get_payment_button.grid(row=4, column=1, pady=15, padx=0)
-
 
 if __name__ == "__main__":
     app = App()
