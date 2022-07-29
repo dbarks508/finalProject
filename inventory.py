@@ -6,8 +6,6 @@ from tkinter import *
 import random
 import csv
 
-
-'''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
 # used car class
 class UsedCar:
     def __init__(self, id=None, make=None, model=None, color=None, year=None):
@@ -40,8 +38,7 @@ class UsedCar:
             csv_writer = csv.DictWriter(file, fieldnames = headers)
             csv_writer.writerow(car_info)
 
-'''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
-# Inventory/computer class  
+# inventory class  
 class Inventory():
     def __init__(self, searchKey=None, searchValue=None):
         self.searchKey = searchKey
@@ -51,8 +48,7 @@ class Inventory():
         carList = readIn()
         return list(filter(lambda item: item[self.searchKey] == self.searchValue, carList))
 
-'''|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
-#customer class
+# customer class
 class Customer():
     def __init__(self, downPayment, price, numMonths):
         self.downPayment = downPayment
@@ -64,9 +60,7 @@ class Customer():
         monthlyTotal = afterMoneyDown / self.numMonths
         return monthlyTotal
        
-
-'''||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'''
-#function to input car with user input
+# function to input car with user input
 def inputCar():
     newId = random.randint(1, 50)
     newMake = input('Enter make: ')
@@ -77,7 +71,7 @@ def inputCar():
     newCar = UsedCar(newId, newMake, newModel, newColor, newYear)
     newCar.save_to_file()
 
-#function to read in from text file
+# function to read in from text file
 def readIn(): 
     carList = []
     stuff = ''
@@ -97,4 +91,3 @@ def readIn():
         carDict = {keys[i]: values[i] for i in range(len(keys))}
         carList.append(carDict)
     return carList
-
